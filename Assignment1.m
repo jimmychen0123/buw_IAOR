@@ -5,11 +5,27 @@ end
 
 function load_image
 
-    image = imread('input_sat_image.jpg');
+##    convert color image to gray scale image
+    OriginImage = imread('input_sat_image.jpg');
+    
+    image = uint8(mean(rgb2gray(OriginImage), 3));
+    
+    
+    
+##    image = imread('input_sat_image.jpg');
     figure(1), imshow(image);
     figure(2), imhist(image);
+    #{
+    Shortly describe the characteristics of the histogram: 
+    Histogram is a graph showing the number of pixels in an image(y axis) at each different intensity value(x axis) found in that image.
+    #}
     
     enhance_contrast(image)
+    #{
+    Shortly describe the differences to the initial histogram:
+    The figure 1 shows a low-contrast image as the the values of x axis in intensity hitogram are only distrbuted in a certain range. To improve the visual quality of the image, One technique of image enhancement is contrast stretching on histogram where the image has to use the full intensity range to display the maximum contrast. Contrast stretching takes an image in which the intensity values span the full intensity range as the figure 3 and 4 shown. 
+    #}
+    
     
 
 end
