@@ -72,12 +72,13 @@ function [new_image] = threshold(image)
     % With this spot is so bright, that if the treshold is to high, the rest of the city
     % is also in the region of interest (ROI). When the treshold is to low, not the whole river
     % is in the ROI.
-    bw = im2bw(image, graytresh(image));
-
+    new_image = im2bw(image, graythresh(image));
 end
 
-function morph_filter
+function [morphed_image] = morph_filter(image, se)
     %function for mophology filter
+    
+    
 end
 
 % saves the image to a jpg. Only the filename is needed.
