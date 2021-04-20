@@ -6,7 +6,7 @@ function Assignment1
     %save_jpg_image(enhanced_image, "enhanced_image");
     
     enhanced_image = imread('enhanced_image.jpg');
-    threshold(enhanced_image);
+    bw_image = threshold(enhanced_image);
     
 end
 
@@ -60,10 +60,20 @@ function [new_image] = enhance_contrast(image)
     
 end
 
-
+% Convert the enhanced image to a binary mask, 
+% 0 = background
+% 1 = region of interest
+% loading im2bw, graytresh
 function [new_image] = threshold(image)
     %function for threshold
     %figure(1), imshow(image);
+    % the resulting treshold by graytresh is 0.4353
+    % Treshold 30 = There is a highlighted spot in the bottom center of the image,
+    % With this spot is so bright, that if the treshold is to high, the rest of the city
+    % is also in the region of interest (ROI). When the treshold is to low, not the whole river
+    % is in the ROI.
+    bw = im2bw(image, graytresh(image));
+
 end
 
 function morph_filter
