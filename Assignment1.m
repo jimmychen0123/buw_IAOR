@@ -1,36 +1,43 @@
 function Assignment1
-    load_image()
+    pkg load image;
+
+    loaded_image    = load_image('input_sat_image.jpg');
+    %enhanced_image  = enhance_contrast(loaded_image);
+    %save_jpg_image(enhanced_image, "enhanced_image");
+    
+    enhanced_image = imread('enhanced_image.jpg');
+    threshold(enhanced_image);
     
 end
 
-function load_image
+% loads and converts the image to a grayscaled image (?)
+function [image] = load_image (filename)
 
 ##    convert color image to gray scale image
-    OriginImage = imread('input_sat_image.jpg');
+    OriginImage = imread(filename);
     
     image = uint8(mean(rgb2gray(OriginImage), 3));
     
     
     
 ##    image = imread('input_sat_image.jpg');
-    figure(1), imshow(image);
-    figure(2), imhist(image);
+    #figure(1), imshow(image);
+    %figure(2), imhist(image);
     #{
     Shortly describe the characteristics of the histogram: 
     Histogram is a graph showing the number of pixels in an image(y axis) at each different intensity value(x axis) found in that image.
     #}
     
-    enhance_contrast(image)
+    %enhance_contrast(image)
     #{
     Shortly describe the differences to the initial histogram:
     The figure 1 shows a low-contrast image as the the values of x axis in intensity hitogram are only distrbuted in a certain range. To improve the visual quality of the image, One technique of image enhancement is contrast stretching on histogram where the image has to use the full intensity range to display the maximum contrast. Contrast stretching takes an image in which the intensity values span the full intensity range as the figure 3 and 4 shown. 
     #}
     
-    
 
 end
 
-function enhance_contrast(image)
+function [new_image] = enhance_contrast(image)
     % get min, max
     max_value = max(image(:))
     min_value = min(image(:))
@@ -47,16 +54,24 @@ function enhance_contrast(image)
             new_image(i,j) = uint8(contrast*255);
         end
     end
-    figure(3), imshow(new_image);
-    figure(4), imhist(new_image);
-    
+    %figure(3), imshow(new_image);
+    %figure(4), imhist(new_image);
+   
     
 end
 
-function threshold
+
+function [new_image] = threshold(image)
     %function for threshold
+    %figure(1), imshow(image);
 end
 
 function morph_filter
     %function for mophology filter
 end
+
+% saves the image to a jpg. Only the filename is needed.
+function save_jpg_image(image, filename)
+    file = strcat(filename, '.jpg');
+    imwrite(image, file, 'jpg');
+ end
