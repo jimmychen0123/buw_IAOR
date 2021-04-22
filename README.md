@@ -1,8 +1,8 @@
 # Bauhaus University SoSe2021 IAOR Assignment 1
 ## Groip J Team members
-Yen Lung Chen
-Martin 
-Henrick
+Yen Lung Chen </br>
+Martin </br>
+Henrick </br>
 ## Topic
 * Image enhancement
 * Derivation of a binary mask by thresholding
