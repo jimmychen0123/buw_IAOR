@@ -21,12 +21,7 @@ function [image] = load_image (filename)
     
     
 ##    image = imread('input_sat_image.jpg');
-    #figure(1), imshow(image);
-    %figure(2), imhist(image);
-    #{
-    Shortly describe the characteristics of the histogram: 
-    Histogram is a graph showing the number of pixels in an image(y axis) at each different intensity value(x axis) found in that image.
-    #}
+    
     
     %enhance_contrast(image)
     #{
@@ -80,8 +75,3 @@ function morph_filter
     %function for mophology filter
 end
 
-% saves the image to a jpg. Only the filename is needed.
-function save_jpg_image(image, filename)
-    file = strcat(filename, '.jpg');
-    imwrite(image, file, 'jpg');
- end
