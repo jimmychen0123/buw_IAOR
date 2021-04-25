@@ -1,4 +1,4 @@
-function [binaryImage] = main
+function [outputImage] = main
   % Scripts contain executable code. They are basically the "main" programs. 
 
   % By default installed packages are not available from the Octave prompt. The functions from a package should be added to the Octave path first
@@ -17,9 +17,11 @@ function [binaryImage] = main
 ##  binaryCompareGraytresh (enhancedImage);
   
   binaryImage = binary(enhancedImage);
+  saveImage(~binaryImage, 'binaryImage');
   
   morphedImage = morphFilter(~binaryImage);
-  saveImage(morphedImage, 'finalImage');
+ 
+  outputImage = morphedImage;
 
   
  end
