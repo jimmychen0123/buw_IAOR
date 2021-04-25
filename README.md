@@ -48,7 +48,10 @@ Also we tried different algorithms of the `graytresh`-function
 By comparing these images we decided to use the Otsu algorithm, because the ROI fitted the best for our needs.
 
 ## Task C
-Why did we decide to use which structure element?
+### Why did we decide to diamond structure element?
+Since structuring element would greatly affect the edge of the ROI with an urban bird-view image given, we found better result and perception with diamond structure element. 
+
+![finalOverlay](https://user-images.githubusercontent.com/39960241/116009590-ce927f80-a61a-11eb-9028-e06dfe1ae124.jpg)
 
 ```
   0  0  0  0  0  1  0  0  0  0  0
@@ -63,6 +66,8 @@ Why did we decide to use which structure element?
   0  0  0  0  1  1  1  0  0  0  0
   0  0  0  0  0  1  0  0  0  0  0
 ```
+![finalOverlayWithDisk](https://user-images.githubusercontent.com/39960241/116009695-64c6a580-a61b-11eb-9be3-569aa6ba2380.jpg)
+
 ```
   0  0  0  0  0  1  0  0  0  0  0
   0  0  1  1  1  1  1  1  1  0  0
@@ -77,4 +82,16 @@ Why did we decide to use which structure element?
   0  0  0  0  0  1  0  0  0  0  0
 ```
 
-Especially why did we use a the SE that big or small? Lets compare different results.
+### Effect of the size of structuring element
+The bigger the structuring element is, less details of ROI or noises can be revealed.
+### Are the results satisfactory? What are the limitations of this approach for separating background and foreground?
+Overall we were happy with the result, most of the ROI(the river) was revealed. However there are areas of urban location were taken as ROI, one of the limitations of morphological filter approach is that it require trail-and-error step to have desired outcome.
+
+### Significant difference with respect to quality of the results for the different input images?
+
+![secondImage](https://user-images.githubusercontent.com/39960241/116010437-35199c80-a61f-11eb-922e-cfca10c05c15.jpg)
+
+![secondImageFinalOverlay](https://user-images.githubusercontent.com/39960241/116010439-3ea30480-a61f-11eb-9d0a-b8f8b5fba088.jpg)
+
+In the second input image we are interested in the fields, and without changing the variables the accuracy of ROI is reduced.
+
