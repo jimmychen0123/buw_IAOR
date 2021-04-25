@@ -9,3 +9,5 @@ fileName = input('Enter the file name inside single quotes: ');
 grayScaleImage = loadAndConvert(fileName);
 enhancedImage = enhanceContrast(grayScaleImage);
 binaryImage = binary(enhancedImage);
+
+morphologicalFilter(binaryImage);

@@ -9,9 +9,9 @@ function binaryImage = binary (enhancedImage)
 
   for i = 1 : size(grayThreshOption, 1)
     
-    binaryImage = im2bw(enhancedImage, graythresh(enhancedImage, grayThreshOption{i,1}));
-    figure();
-    imshow(binaryImage);
+    bw = im2bw(enhancedImage, graythresh(enhancedImage, grayThreshOption{i,1}));
+    figure(i + 4);
+    imshow(bw);
     
   endfor
   
