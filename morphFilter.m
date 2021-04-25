@@ -1,7 +1,8 @@
 function [morphed_image] = morphFilter(image)
     %function for mophology filter
 ##    se = strel('disk',5,0);
-    se = strel('diamond',4);
+##    se = strel('diamond',4);
+    se = strel('diamond',12);
     open_image = imopen(image, se);
     close_image = imclose(image, se);
   
