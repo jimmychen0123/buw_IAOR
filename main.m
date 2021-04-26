@@ -17,11 +17,11 @@ function [outputImage] = main
 ##  binaryCompareGraytresh (enhancedImage);
   
   binaryImage = binary(enhancedImage);
-  saveImage(~binaryImage, 'binaryImage2');
+  % saveImage(binaryImage, 'binaryImage1_1');
   
   morphedImage = morphFilter(~binaryImage);
  
   outputImage = morphedImage;
-
+  saveImage(outputImage, 'outImage1');
   
  end
