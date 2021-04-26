@@ -6,7 +6,7 @@ function [outputImage] = main
 
   %fileName = input('Enter the file name inside single quotes: ');
 
-  grayScaleImage = loadAndConvert('input_sat_image.jpg');
+  grayScaleImage = loadAndConvert('image2.jpg');
   
 ##  enhancedImage = enhanceContrast(grayScaleImage);
   enhancedImage = enhanceContrastV(grayScaleImage);
@@ -17,7 +17,7 @@ function [outputImage] = main
 ##  binaryCompareGraytresh (enhancedImage);
   
   binaryImage = binary(enhancedImage);
-  saveImage(~binaryImage, 'binaryImage');
+  saveImage(~binaryImage, 'binaryImage2');
   
   morphedImage = morphFilter(~binaryImage);
  
