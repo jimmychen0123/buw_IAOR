@@ -25,9 +25,8 @@ morphedImage = morphFilter(binaryImage);
 
 % saveImage(binaryImage, 'binaryImage1_1');
   
-overlay(enhancedImage, morphedImage);
- 
-outputImage = morphedImage;
+outputImage = overlay(enhancedImage, morphedImage);
+
 saveImage(outputImage, 'outImage1');
 
 end
