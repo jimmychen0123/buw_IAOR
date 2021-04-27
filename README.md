@@ -100,17 +100,15 @@ source image1: https://i.pinimg.com/originals/bc/91/af/bc91af8974e84b7e4897eb52b
 source image2: https://c0.wallpaperflare.com/preview/1003/50/552/bird-s-eye-view-photography-of-river-in-city.jpg
 
 In the third we are interested in the water.
-But due to the different water colors (light and shadow) and the similarities between the foreground and background for the algorithm it is very hard to evaluate. 
+But due to the different water colors (light and shadow) and the similarities between the foreground and background we needed to invert the binary mask in order to get proper results. 
 ![firstImageTaksF](https://github.com/henrik-leisdon/buw_IAOR/blob/16818f5c02d2ae1437aa297a53f92b9d8e40f480/image1.jpg)
 
-After inversion, the water/our foreground is detected in the most parts of the image but, in the shadow areas at the top and bottom of the water and also at the transition between foreground and background there are no clear edges.
-COMMENT to me (henrik): add the final images instead of the binary!!! 
+After inversion, the water/our foreground is detected in the most parts of the image. There are a few artifacts on the right side, but overall it worked pretty well.
 ![firstBinaryImageTaskF](https://github.com/henrik-leisdon/buw_IAOR/blob/1a9f21298784d6280b35f371c82a19012811065e/img/outImage3.jpg) 
 
 In the fourth image we are gain interested in the water.
 Here it is a bit clearer because the color difference between the foreground and background is more clear.
 ![secondImageTaksF](https://github.com/henrik-leisdon/buw_IAOR/blob/16818f5c02d2ae1437aa297a53f92b9d8e40f480/image2.jpg)
 
-But again the difference between blue and green is really hard to distinguish.
-COMMENT to me (henrik): add the final images instead of the binary!!! 
+But the small river on the top right of the image was to small to get detected by the algorithm.
 ![secondBinaryImageTaksF](https://github.com/henrik-leisdon/buw_IAOR/blob/1a9f21298784d6280b35f371c82a19012811065e/img/outImage4.jpg)
