@@ -1,6 +1,6 @@
 # Bauhaus University SoSe2021 IAOR Assignment 1
 ## Groip J Team members
-Yen Lung Chen </br>
+Yen Lung Chen 121725 </br>
 Martin 119982</br>
 Henrik Leisdon, 118334</br>
 ## Topic
