@@ -5,9 +5,9 @@ function [outputImage] = main
   pkg load image;
 
  %Two images as input
- gray_image = loadAndConvert('input_sat_image.jpg');
+ gray_image = loadAndConvert('image3.jpg');
 ##  gray_image = loadAndConvert('andreas-gucklhorn-7nV4CZSIoxg-unsplash.jpg');
-=======
+%=======
   %fileName = input('Enter the file name inside single quotes: ');
 
   % grayScaleImage = loadAndConvert('image2.jpg');
@@ -21,12 +21,12 @@ enhancedImage = enhanceContrastV(gray_image);
 ## binaryCompareGraytresh (enhancedImage);
   
 binaryImage = binary(enhancedImage);  
-morphedImage = morphFilter(binaryImage);
+morphedImage = morphFilter(~binaryImage);
 
 % saveImage(binaryImage, 'binaryImage1_1');
   
 outputImage = overlay(enhancedImage, morphedImage);
 
-saveImage(outputImage, 'outImage1');
+saveImage(outputImage, 'outImage2');
 
 end
