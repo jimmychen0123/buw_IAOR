@@ -1,0 +1,3 @@
+function GoG()
+
+end
