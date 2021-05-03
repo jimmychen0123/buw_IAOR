@@ -1,8 +1,11 @@
 function main()
+
 % main function for assignment 2
-originalImage = imread(fileName);
+pkg load image;
+gray_image = loadAndConvert('img/ampelmaennchen.png');
 
-GoG(originalImage);
+%originalImage = imread(fileName);
 
+GoG(gray_image);
 
 end
