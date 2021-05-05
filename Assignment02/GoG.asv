@@ -25,6 +25,7 @@ function GoG(image)
     %        -2,-1,0,1,2;]
     
     % 4. compute filter using c_x and c_y for x and y
+
     
     GoG_filter_x = gradient(c_x,c_y, sigma);
     GoG_filter_y = gradient(c_y,c_x, sigma);
