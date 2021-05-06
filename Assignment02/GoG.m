@@ -34,6 +34,6 @@ end
 function [grd_x1] = gradient(x, y, sigma)
     %input: x and y, sigma = mask radius
     grd_x = (x/2*pi*sigma^4)
-    grd_x1 = grd_x*exp((x^2+y^2)/2*sigma^2)
+    grd_x1 = grd_x*exp(-(x.^2+y.^2)/2*sigma^2)
     
 end
