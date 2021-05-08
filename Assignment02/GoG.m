@@ -4,9 +4,9 @@ function GoG(image)
 
     % 2. Filter kernel radius
     r = cast(abs(3*sigma),'int32');       % abs  =  absoulte value
+    
     % 3. define c_x and c_y arrays with (? * 2 + 1) columns and rows for
     % centered local coordinates:
-    
     c_x = zeros(r*2+1,r*2+1);
 
     for row = 1:r*2+1
@@ -27,19 +27,25 @@ function GoG(image)
     
     GoG_filter_x = gradient(c_x,c_y, sigma);
     GoG_filter_y = gradient(c_y,c_x, sigma);
-    
+  
     im_x = apply_filter(image, GoG_filter_x, r);
     im_y = apply_filter(image, GoG_filter_y, r);
-    figure('name', 'gog1'), imshow(im_x)
-    figure('name', 'gog2'), imshow(im_y)
+    
+%    If limits is a 2-element vector [low, high], the image is shown using a display range between low and high. If an empty matrix is passed for limits, the display range is computed as the range between the minimal and the maximal value in the image.
+    figure('name', 'gogX'), imshow(im_x, [])
+    figure('name', 'gogY'), imshow(im_y, [])
     
 end
 
-function [grd_x1] = gradient(x, y, sigma)
+function [GoG_filter] = gradient(x, y, sigma)
     %input: x and y, sigma = mask radius
-    grd_x = (x./2*pi*sigma^4)
-    grd_x1 = grd_x.*exp(-(x.^2+y.^2)/2*sigma^2)
+%    grd_x = -(x./2*pi*sigma^4)
+%    GoG_filter = grd_x.*exp(-(x.^2+y.^2)/2*sigma^2)
     
+    term_1 = -(x./2*pi*sigma^4);
+    term_2 = -(x.^2 + y.^2) / 2*sigma^2;
+    GoG_filter = term_1.*exp( term_2 )
+
 end
 
 % input image, filter, filter radius
