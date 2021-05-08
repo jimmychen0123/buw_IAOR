@@ -26,7 +26,9 @@ function GoG(image)
     % 4. compute filter using c_x and c_y for x and y
     
     GoG_filter_x = gradient(c_x,c_y, sigma);
+    
     GoG_filter_y = gradient(c_y,c_x, sigma);
+   
   
     im_x = apply_filter(image, GoG_filter_x, r);
     im_y = apply_filter(image, GoG_filter_y, r);
@@ -35,6 +37,9 @@ function GoG(image)
     figure('name', 'gogX'), imshow(im_x, [])
     figure('name', 'gogY'), imshow(im_y, [])
     
+    %Compute and visualize the gradient magnitude image ?
+    G = sqrt(im_x.^2 + im_y.^2);
+    figure('name', 'gradient magnitude image'), imshow(G, [])
 end
 
 function [GoG_filter] = gradient(x, y, sigma)
@@ -45,7 +50,7 @@ function [GoG_filter] = gradient(x, y, sigma)
     term_1 = -(x./2*pi*sigma^4);
     term_2 = -(x.^2 + y.^2) / 2*sigma^2;
     GoG_filter = term_1.*exp( term_2 )
-
+    
 end
 
 % input image, filter, filter radius
