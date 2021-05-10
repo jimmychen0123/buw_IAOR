@@ -6,16 +6,15 @@ gray_image = loadAndConvert('img/ampelmaennchen.png');
 
 %originalImage = imread(fileName);
 
-GoG(gray_image);
+[im_x, im_y] = GoG(gray_image);
+foerstner(gray_image, im_x, im_y)
 
 end
 
 
 function [gray_image] = loadAndConvert (fileName)
-  
-
-  
   %loads and converts the image to a grayscaled image
+  
   disp(fileName);
   originImage = imread(fileName);
   whos originImage
