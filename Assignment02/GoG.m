@@ -1,4 +1,4 @@
-function GoG(image)
+function [im_x, im_y] =  GoG(image)
     % 1. Define standard deviation
     sigma = 0.5;
 
@@ -33,7 +33,11 @@ function GoG(image)
     im_x = apply_filter(image, GoG_filter_x, r);
     im_y = apply_filter(image, GoG_filter_y, r);
     
-%    If limits is a 2-element vector [low, high], the image is shown using a display range between low and high. If an empty matrix is passed for limits, the display range is computed as the range between the minimal and the maximal value in the image.
+%    If limits is a 2-element vector [low, high], the image is shown using 
+%    a display range between low and high. If an empty matrix is passed for
+%    limits, the display range is computed as the range between the minimal
+%    and the maximal value in the image.
+
     figure('name', 'gogX'), imshow(im_x, [])
     figure('name', 'gogY'), imshow(im_y, [])
     
@@ -58,7 +62,6 @@ function g = apply_filter(image, filter, r)
     % convolution h*f
     g = zeros(size(image,1), size(image,2));
     for i = 5:size(image,1)-5
-        fprintf('row = %d \n', i)
         for j = 5:size(image,2)-5
             val = 0;
             
