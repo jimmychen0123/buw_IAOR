@@ -69,8 +69,7 @@ function g = apply_filter(image, filter, r)
                         val = 254;
                     end
                 end
-             
-                
+                    
             g(i,j) = val;
             end
         end
