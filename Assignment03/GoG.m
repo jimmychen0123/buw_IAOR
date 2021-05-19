@@ -1,4 +1,4 @@
-function GoG(image)
+function [im_x, im_y, G] =  GoG(image)
     % 1. Define standard deviation
     sigma = 0.5;
 
@@ -62,7 +62,6 @@ function g = apply_filter(image, filter, r)
     % convolution h*f
     g = zeros(size(image,1), size(image,2));
     for i = 5:size(image,1)-5
-        fprintf('row = %d \n', i)
         for j = 5:size(image,2)-5
             val = 0;
             
