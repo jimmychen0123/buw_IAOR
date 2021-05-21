@@ -1,14 +1,21 @@
-function main()
+function [H] = main()
 
 % main function for assignment 3
-% pkg load image;
+  pkg load image;
   gray_image = loadAndConvert('img/input_ex3.jpg');
 
  %originalImage = imread(fileName);
  % copied from last assignment
   [im_x, im_y, G] = GoG(gray_image);
   
-  houghLineDet(G, im_x, im_y)
+  [H] = houghLineDet(G, im_x, im_y);
+  
+  % Plot the resulting Hough voting array H
+  imshow(H,[0, 10]);
+  
+  % Find local maxima of H
+  local_maxima = houghpeaks(H); % Not tested.
+  
 end
 
 
