@@ -1,39 +1,29 @@
 function [H] = main()
 
-% main function for assignment 3
-  pkg load image;
-  gray_image = loadAndConvert('img/input_ex3.jpg');
-
- %originalImage = imread(fileName);
- % copied from last assignment
-  [im_x, im_y, G] = GoG(gray_image);
+    % main function for assignment 3
+    pkg load image;
   
-  [H] = houghLineDet(G, im_x, im_y);
+    I = double(imread('img/input_ex3.jpg')) / 255; % convert unit8 to double with value range from 0.0 - 1.0
+    GrayScaleImage = mean(I,3);
+  
+    gradientMagnitudeImage = gradientMagnitude(GrayScaleImage);
+    binaryEdgeMask = binaryEdgeMask(gradientMagnitudeImage);
+   
+  
+      
+  
+  
+%  [H] = houghLineDet(G, im_x, im_y);
   
   % Plot the resulting Hough voting array H
-  imshow(H,[0, 10]);
+%  imshow(H,[0, 10]);
   
   % Find local maxima of H
-  local_maxima = houghpeaks(H); % Not tested.
+%  local_maxima = houghpeaks(H); % Not tested.
   
 end
 
 
-function [gray_image] = loadAndConvert (fileName)
-  %loads and converts the image to a grayscaled image
-  
-  disp(fileName);
-  originImage = imread(fileName);
-  whos originImage
-  
-  imageToDouble = im2double(originImage);  
-  %figure('name', 'imageToDouble'), imshow(imageToDouble)
-%  rgb2 and calculate the mean is redundant. Either rgb2gray or the mean
-%  gray_image = uint8(mean(originImage, 3));
-  gray_image = rgb2gray(imageToDouble);
-  whos gray_image
-  %figure('name', 'gray image'), imshow(gray_image)
-end
 
 function saveImage (image, filename)
   
