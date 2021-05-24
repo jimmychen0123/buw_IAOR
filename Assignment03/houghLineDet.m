@@ -8,8 +8,8 @@ function [H] =  houghLineDet(binaryEdgeMaskImage, Ix, Iy)
     theta_range = [-90, 89];
     
     % initialize voting array
-    num_rows = 2*rho_max+1
-    num_cols = 180;
+    num_rows = 180;
+    num_cols = 2*rho_max+1;
     
     H = zeros(num_rows, num_cols);
     
