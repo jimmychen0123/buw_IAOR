@@ -1,4 +1,4 @@
-function [H] = main()
+function  main()
 
 % main function for assignment 3
   pkg load image;
@@ -16,6 +16,7 @@ function [H] = main()
   % Find local maxima of H
   local_maxima = houghpeaks(H); % Not tested.
   
+  
 end
 
 
@@ -24,14 +25,14 @@ function [gray_image] = loadAndConvert (fileName)
   
   disp(fileName);
   originImage = imread(fileName);
-  whos originImage
+  whos originImage;
   
   imageToDouble = im2double(originImage);  
   %figure('name', 'imageToDouble'), imshow(imageToDouble)
 %  rgb2 and calculate the mean is redundant. Either rgb2gray or the mean
 %  gray_image = uint8(mean(originImage, 3));
   gray_image = rgb2gray(imageToDouble);
-  whos gray_image
+  whos gray_image;
   %figure('name', 'gray image'), imshow(gray_image)
 end
 

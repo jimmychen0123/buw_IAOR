@@ -53,7 +53,7 @@ function [GoG_filter] = gradient(x, y, sigma)
     
     term_1 = -(x./2*pi*sigma^4);
     term_2 = -(x.^2 + y.^2) / 2*sigma^2;
-    GoG_filter = term_1.*exp( term_2 )
+    GoG_filter = term_1.*exp( term_2 );
     
 end
 
