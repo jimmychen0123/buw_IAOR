@@ -6,14 +6,10 @@ function [H] = main()
     I = double(imread('img/input_ex3.jpg')) / 255; % convert unit8 to double with value range from 0.0 - 1.0
     GrayScaleImage = mean(I,3);
   
-    gradientMagnitudeImage = gradientMagnitude(GrayScaleImage);
-    binaryEdgeMask = binaryEdgeMask(gradientMagnitudeImage);
-   
-  
-      
-  
-  
-%  [H] = houghLineDet(G, im_x, im_y);
+    [gradientMagnitudeImage, Ix, Iy] = gradientMagnitude(GrayScaleImage);
+    binaryEdgeMaskImage = binaryEdgeMask(gradientMagnitudeImage);
+    
+    H = houghLineDet(binaryEdgeMaskImage, Ix, Iy);
   
   % Plot the resulting Hough voting array H
 %  imshow(H,[0, 10]);

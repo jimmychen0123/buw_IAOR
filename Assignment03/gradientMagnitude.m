@@ -1,4 +1,4 @@
-function [gradientMagnitudeImage] =  gradientMagnitude(grayScaleImage)
+function [gradientMagnitudeImage, Ix, Iy] =  gradientMagnitude(grayScaleImage)
     
     % define constants
     sigma = 0.5; % standard deviation
