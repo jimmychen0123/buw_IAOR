@@ -5,10 +5,13 @@ function [H, index_theta, index_rho] =  houghLineDet(image, im_x, im_y)
     %apply threshold to image
     %BW = imbinarize(image);
     BW = im2bw(image, graythresh(image));
-    % figure('name', 'thresholded'), imshow(BW, []);
+    figure('name', 'thresholded'), imshow(BW, []);
     
     % initialize index vectors
     rho_max = cast(sqrt(size(image,1)^2+size(image,2)^2), 'int32');
+    index_theta = []; %empty matrix
+    index_rho = []; %empty matrix
+    
     
     % initialize voting array
     num_cols = 181;
@@ -23,11 +26,17 @@ function [H, index_theta, index_rho] =  houghLineDet(image, im_x, im_y)
                 % cast to int
                 theta = cast(theta+91, 'int32');
                 rho = cast(rho+rho_max, 'int32');
+                % store the data 
+                index_theta = [index_theta theta];
+                index_rho = [index_rho rho];
                 
                 H(theta,rho) = H(theta, rho) + 1;
             end
         end
     end
+    
+    index_theta = sort(index_theta);
+    index_rho = sort(index_rho);
     
     figure('name', 'voting array'), imshow(H, [])
     
