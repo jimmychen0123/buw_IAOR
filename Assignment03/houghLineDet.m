@@ -1,6 +1,6 @@
 function [H, index_theta, index_rho] =  houghLineDet(image, im_x, im_y)
+   
     % output H = voting array, index_array the ranges of theta and rho(p) 
-    
     %task c
     %apply threshold to image
     BW = im2bw(image, graythresh(image));
@@ -31,17 +31,9 @@ function [H, index_theta, index_rho] =  houghLineDet(image, im_x, im_y)
         end
     end
     
-      % Task e and f
+    % Task e to g
     % find local maxima with MATLAB function houghpeaks
-%    peaks = 20;
-%    %P = houghpeaks(H, peaks, 'threshold', ceil(0.3 * max(H(:))));
-%    P = houghpeaks(H, peaks, 'threshold', 0.1);
-%    imshow(H,[],'XData',index_theta,'YData',index_rho,'InitialMagnification','fit');
-%    xlabel('\theta'), ylabel('\rho');
-%    axis on, axis normal, hold on;
-%    plot(index_theta(P(:,2)),index_rho(P(:,1)),'s','color','red');
-%    hold off;
-    
+
     figure, imshow (H, [],"XData",index_theta,"YData",index_rho);
     title ("Hough transform of edge image \n 20 peaks marked");
     axis on; xlabel("theta [degrees]"); ylabel("rho [pixels]");
@@ -52,10 +44,8 @@ function [H, index_theta, index_rho] =  houghLineDet(image, im_x, im_y)
     plot(peaks_theta,peaks_rho,"sr");
     hold off;
     
-    
+    % Task h to i
     I = imread('img/input_ex3.jpg');
-    
-    
     lines = houghlines(BW,index_theta,index_rho,peaks,'FillGap',5,'MinLength',7);
     figure, imshow(I), hold on
     max_len = 0;
