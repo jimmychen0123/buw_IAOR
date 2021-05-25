@@ -4,14 +4,10 @@ function  main()
   pkg load image;
   gray_image = loadAndConvert('img/input_ex3.jpg');
 
- %originalImage = imread(fileName);
  % copied from last assignment
   [im_x, im_y, G] = GoG(gray_image);
   
   [H] = houghLineDet(G, im_x, im_y);
-  
-
- 
   
 end
 
