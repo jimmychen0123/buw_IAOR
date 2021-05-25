@@ -3,42 +3,54 @@ function [H, index_theta, index_rho] =  houghLineDet(image, im_x, im_y)
     
     %task c
     %apply threshold to image
-    %BW = imbinarize(image);
     BW = im2bw(image, graythresh(image));
     figure('name', 'thresholded'), imshow(BW, []);
     
     % initialize index vectors
-    rho_max = cast(sqrt(size(image,1)^2+size(image,2)^2), 'int32');
-    index_theta = []; %empty matrix
-    index_rho = []; %empty matrix
-    
+    rho_max = round(sqrt(size(BW,1)^2+size(BW,2)^2));
+    index_theta = [-90: 1: 89]; %define theta range
+    index_rho = [-rho_max: 1: rho_max]; %define rho range
     
     % initialize voting array
     num_cols = 181;
-    H = zeros(num_cols, 2*rho_max+1);
-    for x = 1:size(image,1)
-        for y = 1:size(image,2)
+    num_rows = 2*rho_max+1;
+    H = zeros(num_rows, num_cols);
+    for x = 1:size(BW,1)
+        for y = 1:size(BW,2)
             % if pixel is white -> edge detected
             if BW(x,y) == 1 
                 % gradient detection
-                theta = atand(im_y(x,y)/im_x(x,y));
-                rho = x*cosd(theta)+y*sind(theta);
+                theta = round(atand(im_y(x,y)/im_x(x,y)));
+                rho = round(x*cosd(theta)+y*sind(theta));
                 % cast to int
-                theta = cast(theta+91, 'int32');
-                rho = cast(rho+rho_max, 'int32');
-                % store the data 
-                index_theta = [index_theta theta];
-                index_rho = [index_rho rho];
+                h_theta = round(theta) + 91;
+                h_rho = round(rho) + rho_max;
                 
-                H(theta,rho) = H(theta, rho) + 1;
+                H(h_rho,h_theta) = H(h_rho, h_theta) + 1;
             end
         end
     end
     
-    index_theta = sort(index_theta);
-    index_rho = sort(index_rho);
+      % Task e and f
+    % find local maxima with MATLAB function houghpeaks
+%    peaks = 20;
+%    %P = houghpeaks(H, peaks, 'threshold', ceil(0.3 * max(H(:))));
+%    P = houghpeaks(H, peaks, 'threshold', 0.1);
+%    imshow(H,[],'XData',index_theta,'YData',index_rho,'InitialMagnification','fit');
+%    xlabel('\theta'), ylabel('\rho');
+%    axis on, axis normal, hold on;
+%    plot(index_theta(P(:,2)),index_rho(P(:,1)),'s','color','red');
+%    hold off;
     
-    figure('name', 'voting array'), imshow(H, [])
+    figure, imshow (H, [],"XData",index_theta,"YData",index_rho);
+    title ("Hough transform of edge image \n 2 peaks marked");
+    axis on; xlabel("theta [degrees]"); ylabel("rho [pixels]");
+    peaks = houghpeaks (H, 20);
+    peaks_rho = index_rho(peaks(:,1))
+    peaks_theta = index_theta(peaks(:,2))
+    hold on;
+    plot(peaks_theta,peaks_rho,"sr");
+    hold off;
     
 
 end
