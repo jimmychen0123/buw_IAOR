@@ -10,11 +10,7 @@ function  main()
   
   [H] = houghLineDet(G, im_x, im_y);
   
-  % Plot the resulting Hough voting array H
-%  imshow(H,[]);
-  
-  % Find local maxima of H
-  local_maxima = houghpeaks(H); % Not tested.
+
  
   
 end
