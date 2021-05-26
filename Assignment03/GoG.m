@@ -1,6 +1,6 @@
 function [im_x, im_y, G] =  GoG(image)
     % 1. Define standard deviation
-    sigma = 0.5;
+    sigma = 0.3;
 
     % 2. Filter kernel radius
     r = cast(abs(3*sigma),'int32');       % abs  =  absoulte value
