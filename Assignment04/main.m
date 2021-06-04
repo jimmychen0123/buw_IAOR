@@ -1,11 +1,16 @@
 function  main()
 
 % main function for assignment 4
-  pkg load image;
-  gray_image = loadAndConvert('img/input_ex3.jpg');
+  % pkg load image;
   
   
+  gray_image = loadAndConvert('img/trainB.png');
+  test1 = loadAndConvert('img/test1B.jpg');
+  test2 = loadAndConvert('img/test2B.jpg');
+  test3 = loadAndConvert('img/test3B.jpg');
   
+  [image] = taskB(gray_image, test1, test2, test3);
+
 end
 
 
