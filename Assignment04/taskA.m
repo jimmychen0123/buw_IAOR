@@ -1,7 +1,7 @@
-function taskA(gray_image)
+function [noise_img] = taskA(gray_image)
     
-    noise_img = imnoise(gray_image, 'gaussian', 0, 0.01)
-    
+    noise_img = imnoise(gray_image, 'gaussian', 0, 0.01);
+    figure('name', 'Task A: Imnoise image'), imshow(noise_img);
     %FFT:
     % F(u,v) = 1/M*N SUM(0,M-1)SUM(0,N-1) f(x,y)*e^(j*2*pi*(u*x/M + l*y/N))
     % for every u, v
