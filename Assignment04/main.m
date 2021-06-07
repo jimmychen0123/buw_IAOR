@@ -6,13 +6,17 @@ function  main()
   
   [noise_img] = taskA('img/taskA.png');
   
+  taskAImage = loadAndConvert('img/taskA.png');
   
   gray_image = loadAndConvert('img/trainB.png');
-  test1 = loadAndConvert('img/test1B.jpg');
-  test2 = loadAndConvert('img/test2B.jpg');
-  test3 = loadAndConvert('img/test3B.jpg');
+%  test1 = loadAndConvert('img/test1B.jpg');
+%  test2 = loadAndConvert('img/test2B.jpg');
+%  test3 = loadAndConvert('img/test3B.jpg');
   
-  [image] = taskB(gray_image, test1, test2, test3);
+   noise_image = taskA(taskAImage);
+   ifigure('name', 'Task A: Imnoise image'), imshow(noise_img);
+%  imshow(imnoise_image);
+%  [image] = taskB(gray_image, test1, test2, test3);
 
 end
 
