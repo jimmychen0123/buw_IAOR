@@ -46,6 +46,7 @@ subplot(1,3,3), imshow(fil); title('Filtered image after inverse FFT');
 % Task B - Shape recognition
 % Task a
 trainB = im2double(rgb2gray(imread('img/trainB.png')));
+figure; imshow(trainB, []);
 % Task b
 bmtrainB = im2bw(trainB,graythresh(trainB));
 % Task c
@@ -64,6 +65,7 @@ Df_train = abs(Df_train);
 
 
 test1B = mat2gray(mean(imread('test1B.jpg'),3));
+
 bmtest1B = im2bw(test1B, graythresh(test1B));
 [valuesB1, img1descriptors] = makeFourierDescriptor(bmtest1B);
 figure; 

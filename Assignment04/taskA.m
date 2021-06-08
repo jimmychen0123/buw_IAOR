@@ -9,7 +9,7 @@ function [origin_img, noise_img, denoise_img] = taskA(filePathString)
     % task b
     M = 0;
     V = 0.01;
-    noise_img = imnoise(gray_img, 'gaussian', M, V)
+    noise_img = imnoise(gray_img, 'gaussian', M, V);
     whos noise_img
     figure; subplot(1, 5, 1); imshow(noise_img); title('Noised Image');
     
@@ -46,7 +46,7 @@ function [origin_img, noise_img, denoise_img] = taskA(filePathString)
     
     subplot(1,5,3), imagesc(log(abs(fftshift(gFilter_pad_fft)))); title('logarithmic centered image spectrath of (padded) Gaussianfilter');
     subplot(1,5,4), imagesc(log(abs(fftshift(fil_fft)))); title('logarithmic centered image spectra of filtered image')
-    subplot(1,5,5), imshow(fil); title('Filtered image after inverse FFT');
+    subplot(1,5,5), imshow(fil, []); title('Filtered image after inverse FFT');
    
 end
 

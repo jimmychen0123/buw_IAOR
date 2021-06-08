@@ -1,10 +1,14 @@
 function [D_f_train] = taskB(train_image, test1_img, test2_img, test3_img)
     
- bin_train = im2bw(train_image, graythresh(train_image));
- % load the test images
- % bin_test1 = im2bw(test1_img, graythresh(test1_img));
- % bin_test2 = im2bw(test2_img, graythresh(test2_img));
- % bin_test3 = im2bw(test3_img, graythresh(test3_img));
+    % Task b 
+    bin_train = im2bw(train_image, graythresh(train_image));
+    
+    figure; imshow(bin_train, []); title('binary mask');
+    
+    % load the test images
+    bin_test1 = im2bw(test1_img, graythresh(test1_img));
+    bin_test2 = im2bw(test2_img, graythresh(test2_img));
+    bin_test3 = im2bw(test3_img, graythresh(test3_img));
  
  D_f_train = getD_f(bin_train);
  D_f_train = D_f_train(1:24); %this is D_f,train 
