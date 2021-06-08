@@ -13,8 +13,6 @@ function  main()
 %  test2 = loadAndConvert('img/test2B.jpg');
 %  test3 = loadAndConvert('img/test3B.jpg');
   
-   noise_image = taskA(taskAImage);
-   ifigure('name', 'Task A: Imnoise image'), imshow(noise_img);
 %  imshow(imnoise_image);
 %  [image] = taskB(gray_image, test1, test2, test3);
 

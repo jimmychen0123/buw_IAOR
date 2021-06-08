@@ -66,7 +66,7 @@ function [noise_img] = taskA(filePathString)
     
     %apply Gauss2D Filter
     sigma = 0; % Just a dummy variable;
-    gauss_image = gauss2dFilter(noise_img, sigma);
+    gauss2dFilter(noise_img, sigma);
     
 
 end
