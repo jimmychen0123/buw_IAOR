@@ -8,8 +8,8 @@ function [noise_img] = taskA(filePathString)
     % task b
     M = 0;
     V = 0.01;
-    noise_img = imnoise(gray_img, 'gaussian', M, V)
-    whos noise_img
+    noise_img = imnoise(gray_img, 'gaussian', M, V);
+    whos noise_img;
     figure; subplot(1, 5, 1); imshow(noise_img); title('Noised Image');
 
     % task c
@@ -52,7 +52,7 @@ function [noise_img] = taskA(filePathString)
     FT = fft2(noise_img);
     FT_Centred = fftshift(FT); 
     
-    noise_img = imnoise(gray_image, 'gaussian', 0, 0.01);
+    noise_img = imnoise(gray_img, 'gaussian', 0, 0.01);
     
     %FFT:
     % F(u,v) = 1/M*N SUM(0,M-1)SUM(0,N-1) f(x,y)*e^(j*2*pi*(u*x/M + l*y/N))
@@ -71,14 +71,12 @@ function [noise_img] = taskA(filePathString)
 
 end
 
-function [gauss2D] = gauss2dFilter(noise_img, sigma)
-    term_1 = (1 / (2*pi*sigma^2));
-    term_2 = (x^2 + y.^2) / (2*sigma^2);
-    gauss2D = term_1.*exp( -term_2 );
+function gauss2dFilter(noise_img, sigma)
+    %term_1 = (1 / (2*pi*sigma^2));
+    %term_2 = (x^2 + y.^2) / (2*sigma^2);
+    %gauss2D = term_1.*exp( -term_2 );
     
     % add padding
-    
-    
 end
 
 function ifft2(noise_img)
