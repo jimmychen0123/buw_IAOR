@@ -12,7 +12,7 @@ function  main()
     test2 = loadAndConvert('img/test2B.jpg');
     test3 = loadAndConvert('img/test3B.jpg');
   
-    [image] = taskB(gray_image, test1, test2, test3);
+    taskB(gray_image, test1, test2, test3);
 
 
 end
@@ -29,7 +29,6 @@ end
 function saveImage (image, filename)
   
   % saves the image to a jpg. Only the filename is needed.
-  
   file = strcat(filename, '.jpg');
   imwrite(image, file, 'jpg');
  
