@@ -1,7 +1,10 @@
 function  main()
 
 % main function for assignment 4
+
   pkg load image;
+  
+  [noise_img] = taskA('img/taskA.png');
   
   taskAImage = loadAndConvert('img/taskA.png');
   
