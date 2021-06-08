@@ -14,6 +14,7 @@ function  main()
   
     taskB(gray_image, test1, test2, test3);
 
+
 end
 
 
