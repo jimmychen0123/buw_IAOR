@@ -10,6 +10,7 @@ i_noise = imnoise(imgA, "gaussian", 0, 0.01); % mean = 0, variance = 0.01
 %figure; imshow(i_noise); title('Original image in grayscale with Gaussian noise');
 % Task c
 g = gaussgradient2D(2.8);
+figure; imshow(g, []);
 
 [h, w] = size(i_noise);
 [gh, gw] = size(g);
@@ -20,7 +21,9 @@ col = round(w/2 - gw/2);
 % with 2D gaussian filter and zero padding arround
 g_pad = zeros(h, w);
 g_pad(1:gh, 1:gw) = g;
+figure; imshow(g_pad, []);
 g_pad = circshift(g_pad, round([-gh/2, -gw/2]));
+figure; imshow(g_pad, []);
 
 % FFT of image and filter
 imn_fft = fft2(i_noise);

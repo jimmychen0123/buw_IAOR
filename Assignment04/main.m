@@ -4,7 +4,7 @@ function  main()
 
   pkg load image;
   
-  [noise_img] = taskA('img/taskA.png');
+  [origin_img, noise_img, denoise_img] = taskA('img/taskA.png');
   
   taskAImage = loadAndConvert('img/taskA.png');
   

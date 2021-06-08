@@ -1,9 +1,10 @@
-function [noise_img] = taskA(filePathString)
+function [origin_img, noise_img, denoise_img] = taskA(filePathString)
     
     % task a
     % Read the input image taskA.png and convert it to a grayscale image (double values between 0.0 and 1.0)
     I = double(imread(filePathString)) / 255;
     gray_img = rgb2gray(I);
+    origin_img = gray_img;
    
     % task b
     M = 0;
@@ -16,86 +17,54 @@ function [noise_img] = taskA(filePathString)
     FT = fft2(noise_img);
     FT_Centred = fftshift(FT);
     
-    subplot(1, 5, 2); imagesc(log(1 + abs( FT_Centred)), []); title('Centred spectra of noisy image');
+    subplot(1, 5, 2); imagesc(log(abs( FT_Centred)), []); title('Centred spectra of noisy image');
 
     % task c
-    
     % gaussian filter
-    sigma = 1.0; %standard deviation
+    sigma = 3.0; %standard deviation
     
-%    sz = 250; %window size
-    [xd , yd] = size(noise_img);
-    X = -xd./2 : xd./2-1;
-    Y = -yd./2 : yd./2-1;
-%    ind = -floor(sz/2) : floor(sz/2); 
-%    [x, y] = meshgrid(ind, ind);
-    [x, y] = meshgrid(X, Y);
+    gaussianFilter = gaussgradient2D(sigma);
     
-%    M = size(x,1) - 1;
-%    N = size(y,1) - 1;
-    
-    Exp_comp = -(x.^2+y.^2)/(2*sigma*sigma);
-    Kernel= exp(Exp_comp)/(2*pi*sigma*sigma);
-    Kernel = Kernel / sum(Kernel(:));
- 
-    
-    subplot(1, 5, 3); imshow( Kernel, []); title('Gaussian filter');
-    
-    imFilter = abs(ifft2(FT_Centred.*Kernel));
-    
-    subplot(1, 5, 4); imshow( imFilter, []); title('Denoised image');
-    
-    
-     
-    
-    %Initialize
-%    Output=zeros(size(noise_img));
-    %Pad the vector with zeros
-%    noise_img = padarray(noise_img,[sz sz]);
+    % compute filtering kernel with same size as image
+    % with 2D gaussian filter and zero padding arround
+    [h, w] = size(noise_img);
+    [gh, gw] = size(gaussianFilter);
 
-%    %Convolution
-%    for i = 1:size(noise_img,1)-M
-%        for j =1:size(noise_img,2)-N
-%            Temp = noise_img(i:i+M,j:j+M).*Kernel;
-%            Output(i,j)=sum(Temp(:));
-%        end
-%    end
-    %Image without Noise after Gaussian blur
+    gFilter_pad = zeros(h, w);
+    gFilter_pad(1:gh, 1:gw) = gaussianFilter;
+    gFilter_pad = circshift(gFilter_pad, round([-gh/2, -gw/2]));
     
-%    figure,imshow(Output);
-    
-    
-    
-%    g = fspecial('gaussian', size(noise_img), 10);
-    
-    
-    %FFT:
-    % F(u,v) = 1/M*N SUM(0,M-1)SUM(0,N-1) f(x,y)*e^(j*2*pi*(u*x/M + l*y/N))
-    % for every u, v
-    
-    % scalar = magnitude -> abs(comlex_value)
-    
-    %centering
-    
-    %log
-    
-    %apply Gauss2D Filter
-    
-    
+    % FFT filter
 
+    gFilter_pad_fft = fft2(gFilter_pad);
+
+    % multiply element-wise in the frequency domain
+    fil_fft = FT .* gFilter_pad_fft;
+    % apply inverse FFT
+    fil = ifft2(fil_fft);
+    denoise_img = fil;
+    
+    subplot(1,5,3), imagesc(log(abs(fftshift(gFilter_pad_fft)))); title('logarithmic centered image spectrath of (padded) Gaussianfilter');
+    subplot(1,5,4), imagesc(log(abs(fftshift(fil_fft)))); title('logarithmic centered image spectra of filtered image')
+    subplot(1,5,5), imshow(fil); title('Filtered image after inverse FFT');
+   
 end
 
-function gauss2dFilter(noise_img)
-    term_1 = (x./2*pi*sigma^2);
-    term_2 = -(x.^2 + y.^2) / 2*sigma^2;
-    gauss2D = term_1.*exp( term_2 );
-    
-    % add padding
-    
-    
-end
-
-function ifft2(noise_img)
-
+function [gaussianFilter] = gaussgradient2D(sigma)
+  size = round(3 * sigma);
+  g = zeros(size,size);
+  r = (size-1)/2;
+  for i = -r:r
+      for j = -r:r
+          % centering
+          x0 = (size+1)/2;
+          y0 = (size+1)/2;
+          row = i+x0;
+          col = j+y0;
+          g(col,row) = exp(-((row-x0)^2+(col-y0)^2)/2/sigma/sigma);
+      end
+  end
+  % normalize filter
+  gaussianFilter = g/sum(sum(g));
 end
 
