@@ -1,11 +1,12 @@
 function  main()
 
 % main function for assignment 4
-
+    clear;
     %pkg load image;
-    [F] = loadAndConvert('img/inputEx5_2.jpg');
-    figure
-    scatter3(F(:,1),F(:,2), F(:,3),'.','r')
+    [image] = loadAndConvert('img/inputEx5_1.jpg');
+    %figure
+    %scatter3(image(:,1),image(:,2), image(:,3),'.','r')
+    k_means(image, 4);
 
 
 end
@@ -38,7 +39,7 @@ function [out] = loadAndConvert (fileName)
     
     % outputs a matrix of the form:
     % R | G | B | x | y
-    out = [F coord]
+    out = [F coord];
    	
     
  
