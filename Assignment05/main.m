@@ -4,9 +4,11 @@ function  main()
     clear;
     %pkg load image;
     [image] = loadAndConvert('img/inputEx5_1.jpg');
+    
     %figure
     %scatter3(image(:,1),image(:,2), image(:,3),'.','r')
-    k_means(image, 4);
+    [out_imgA] = k_means(image, 3);
+    saveImage (out_imgA, 'task_A_3cc')
 
 
 end
@@ -16,6 +18,7 @@ function [out] = loadAndConvert (fileName)
 
     %loads the image
     I = im2double(imread(fileName));
+    
     F = reshape(I,[],3);
     
     coord = zeros(size(I,1)*size(I,2),2);
@@ -26,8 +29,8 @@ function [out] = loadAndConvert (fileName)
         y = 1;
         for j=1:size(I,2)
             
-            coord(it,1) = x;
-            coord(it,2) = y;
+            coord(it,1) = y;
+            coord(it,2) = x;
             y = y+1;
             it = it+1;
         end
