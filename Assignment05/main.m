@@ -7,9 +7,11 @@ function  main()
     
     %figure
     %scatter3(image(:,1),image(:,2), image(:,3),'.','r')
-    [out_imgA] = k_means(image, 3);
-    saveImage (out_imgA, 'task_A_3cc')
+    %[out_imgA] = k_means(image, 3);
+    %saveImage (out_imgA, 'task_A_3cc')
 
+    %Task B
+    mean_shift(image);
 
 end
 
