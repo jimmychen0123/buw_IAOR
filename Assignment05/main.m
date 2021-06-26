@@ -19,10 +19,13 @@ function [out] = loadAndConvert (fileName)
     %loads the image
     I = im2double(imread(fileName));
     
+    %Reshape the image to 3D feature space (L*U*V)??
     F = reshape(I,[],3);
     
+    % Creating the a zero matrix for x and y
     coord = zeros(size(I,1)*size(I,2),2);
     
+    % Setting the RGB points to the x and y position
     it = 1;
     x = 1;
     for i=1:size(I,1)
@@ -47,7 +50,6 @@ function [out] = loadAndConvert (fileName)
     
  
 end
-
 function saveImage (image, filename)
   
   % saves the image to a jpg. Only the filename is needed.
