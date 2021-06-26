@@ -2,7 +2,7 @@ function  main()
 
 % main function for assignment 4
     clear;
-    %pkg load image;
+    pkg load image;
     [image] = loadAndConvert('img/inputEx5_1.jpg');
     
     %figure
