@@ -26,43 +26,71 @@ function [image] = mean_shift(filePath)
     % Define window size, which will determine the neighbors within the window / kernel
     window_size = 0.2; % Need to be reconsidered 
     
+    % threshhold for convegence
+    threshhold = 0.05
     
-    % we need a while loop as a condition for convegence
-    while 
-            % Initialize windows at individual feature points
+    % variables to check convegence
+    old_centroid = zeros(1, 3); 
+    new_centroid = zeros(1, 3); 
+        
+    % Initialize windows at individual feature points
     
     for i = 1 : size (data_points, 1) % first loop for each data point to find its mode
         
         weightXYZ = zeros(1, 3); % create 1 by 3 matrix to store the weight of dataa points within the window
-        nm_dps = zero(1, 1); % number of data points within the window
+        nm_dps = 0; % number of data points within the window
         
-        data_points(i, :) % current data point as a centroid
+        data_points(i, :) % current data point
         
-        for j = 1 : size (data_points, 1) % the second loop to find all the data points within the window
+        % we need a while loop as a condition for convegence
+        while 1
             
-            window_center = data_points(i, :); %window center
-            possible_dp = data_points(j, :); %possible data point
+            old_centroid = data_points(i, :); % current data point as a centroid
             
-            distance = calculate_distance(possible_dp, window_center); % debug
+            for j = 1 : size (data_points, 1) % the second loop to find all the data points within the window
             
-            if (distance < window_size)
+                window_center = data_points(i, :); %window center
+                possible_dp = data_points(j, :); %possible data point
+            
+                distance = calculate_distance(possible_dp, window_center); % debug
+            
+                if (distance < window_size)
                 
-                weightXYZ += possible_dp
+                    weightXYZ += possible_dp;
+                    nm_dps += 1;
                 
-            end %end if  
+                end %end if  
              
-        end % end second loop
+            end % end second loop
         
-        % new c
-        % compute the mean and shift the window
-        data_points(i, :) = weightXYZ / nm_dps;
+            % compute the mean
+            new_centroid = weightXYZ / nm_dps;
+            
+            if calculate_distance(new_centroid, old_centroid) < threshhold
+                
+                break
+                
+            end % end if
         
+            % shift the window
+            data_points(i, :) = new_centroid;
+            
+        end % end while
         
-        % till concergence
+         
         
     end % end first loop
+    
+    image = data_points;
+    
+    % visualise the feature space after mean shift 
+    subplot(1, 2, 2);
+%    scatter3(data_points(:, 1), data_points(:, 2), data_points(:, 3)); 
+    scatter3(red_channel, green_channel, blue_channel); 
+    title("feature space after mean shift");
         
-    end % end while
+        
+   
 
 
  

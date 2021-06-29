@@ -4,7 +4,7 @@ function  main()
     
 % main function for assignment 5
 
-    clc;
+    clc all;
     close all;
     clear;
     
