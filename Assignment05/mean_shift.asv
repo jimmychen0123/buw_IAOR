@@ -1,20 +1,20 @@
 function [image] = mean_shift(I) 
     
     % build feature space based on R G B
-    % R | G | B | label
+     R | G | B | x | y | clustercenter
     cc = zeros(size(I,1) ,1);
-    data_points = [I(:,1:3) cc];
+    data_points = [I cc];
 
     
     
-    %red_channel = rgbImage(:, :, 1);
-    %green_channel = rgbImage(:, :, 2);
-    %blue_channel = rgbImage(:, :, 3);
+    red_channel = rgbImage(:, :, 1);
+    green_channel = rgbImage(:, :, 2);
+    blue_channel = rgbImage(:, :, 3);
     
     
-    % label = zeros(size(rgbImage(:, :, 1),1));
+    label = zeros(size(rgbImage(:, :, 1),1));
     
-    % data_points = [red_channel(:), green_channel(:), blue_channel(:), label(:)];
+    data_points = [red_channel(:), green_channel(:), blue_channel(:), label(:)];
     whos data_points
     
     % plot the origin image
@@ -33,7 +33,7 @@ function [image] = mean_shift(I)
     window_size = 0.2; % Need to be reconsidered 
     
     % threshhold for convegence
-    threshhold = 0.05;
+    threshhold = 0.05
     
     % variables to check convegence
     % old_centroid = zeros(1, 3); 
@@ -63,7 +63,7 @@ function [image] = mean_shift(I)
     
     % initialize window
 
-    old_center_list = center_list
+    
     for i = 1 : size (center_list, 1) % first loop for each data point to find its mode
         
         weightXYZ = zeros(1, 3); % create 1 by 3 matrix to store the weight of data points within the window
@@ -77,7 +77,7 @@ function [image] = mean_shift(I)
         for j = 1 : size (data_points, 1) % the second loop to find all the data points within the window
         
             window_center = center_list(i, :); %window center
-            possible_dp = data_points(j, 1:3); %possible data point
+            possible_dp = data_points(j, :); %possible data point
         
             distance = calculate_distance(possible_dp, window_center); % debug
         
@@ -96,29 +96,16 @@ function [image] = mean_shift(I)
         new_centroid = weightXYZ / nm_dps;
     
         % shift the window
-        center_list(i, 1:3) = new_centroid;
+        data_points(i, :) = new_centroid;
             
     end % end first loop
     
-    % merge centroids:
-    
-    new_center_list = zeros(1:20,3)
-    for i = 1:20
-        new_center_list(i,:) = center_list(i,:)
-        
-        for j = 1:20
-           
-        end
-    end
-    
-    
-    center_list
     image = data_points;
     
     % visualise the feature space after mean shift 
     subplot(1, 2, 2);
 %    scatter3(data_points(:, 1), data_points(:, 2), data_points(:, 3)); 
-    % scatter3(red_channel, green_channel, blue_channel); 
+    scatter3(red_channel, green_channel, blue_channel); 
     title("feature space after mean shift");
         
         
