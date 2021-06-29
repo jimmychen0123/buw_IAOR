@@ -9,6 +9,7 @@ function  main()
     clear;
     
     pkg load image;
+    pkg load statistics;
     
 %    [image] = loadAndConvert('img/inputEx5_1.jpg');
     [image] = loadAndConvert('img/inputEx5_2.jpg');
