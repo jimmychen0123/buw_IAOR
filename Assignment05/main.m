@@ -1,9 +1,17 @@
 function  main()
+    
+    
+    
+% main function for assignment 5
 
-% main function for assignment 4
+    clc;
+    close all;
     clear;
+    
     pkg load image;
-    [image] = loadAndConvert('img/inputEx5_1.jpg');
+    
+%    [image] = loadAndConvert('img/inputEx5_1.jpg');
+    [image] = loadAndConvert('img/inputEx5_2.jpg');
     
     %figure
     %scatter3(image(:,1),image(:,2), image(:,3),'.','r')
@@ -11,7 +19,7 @@ function  main()
     %saveImage (out_imgA, 'task_A_3cc')
 
     %Task B
-    mean_shift(image);
+    mean_shift('img/inputEx5_2.jpg');
 
 end
 
