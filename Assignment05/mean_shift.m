@@ -1,5 +1,16 @@
 function [image] = mean_shift(I) 
     
+    % Task B: The effect of window size
+    % The large windoe size is the less number of the clustering would be found. Hence, with larger window size, more details(colours) in the image segmentation can be seen. In addition, to reduce the computing expense we tried to adjust the window size (the larger the window size is the less of computing time)
+    
+    % Task D: Compare the results produced with the algorithms from k mean and mean shift
+    % Unlike the K-Means cluster algorithm, mean-shift does not require specifying the number of clusters in advance. Hence, more details (e.g colours) in the image may be reserved by the window size in the mean shift algorithm, or the pre-define clustering number in the k mean alorithm
+    
+    % Task E: How to accelerate the operation of mean shift?
+    % Although we are not able to generate the desired result, during the implementation, we tried to only use sample of the feature points(e.g start with every 1000th pixel as a centroid, if the window is large enough it will probably cluster every pixel). The mean algorithm’s runtime complexity is O(KN2), , where N is the number of datapoints and K is the number of iterations of Meanshift. Another approach is to limit the number of iterations.
+    
+    % Note: We are not able to complete the algorithm, however please have a look at our rationale by the comments below for our logical thining process
+    
     % build feature space based on R G B
     % R | G | B | label
     cc = zeros(size(I,1) ,1);
