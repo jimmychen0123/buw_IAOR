@@ -11,17 +11,20 @@ function  main()
     pkg load image;
     pkg load statistics;
     
-%    [image] = loadAndConvert('img/inputEx5_1.jpg');
-    [image] = loadAndConvert('img/inputEx5_2.jpg');
+    [image] = loadAndConvert('img/inputEx5_1.jpg');
+    % [image] = loadAndConvert('img/inputEx5_2.jpg');
     
     %figure
     %scatter3(image(:,1),image(:,2), image(:,3),'.','r')
-    %[out_imgA] = k_means(image, 3);
-    %saveImage (out_imgA, 'task_A_3cc')
+    [out_imgA] = k_means(image, 4);
+    saveImage (out_imgA, 'task_A_img_4')
 
     %Task B
+
     output = mean_shift(image);
     saveImage (output, 'task_B_input2')
+
+    %mean_shift(image);
 
 end
 
