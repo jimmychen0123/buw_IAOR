@@ -14,61 +14,44 @@ function [image] = mean_shift(I)
     % build feature space based on R G B
     % R | G | B | label
     cc = zeros(size(I,1) ,1);
-    data_points = [I(:,1:3) cc];
+    data_points = [I(:, 1:3), cc];
 
-    
-    
-    %red_channel = rgbImage(:, :, 1);
-    %green_channel = rgbImage(:, :, 2);
-    %blue_channel = rgbImage(:, :, 3);
-    
-    
-    % label = zeros(size(rgbImage(:, :, 1),1));
-    
-    % data_points = [red_channel(:), green_channel(:), blue_channel(:), label(:)];
     whos data_points
     
     % plot the origin image
-    %figure;
-    %subplot(1, 2, 1);
-    %imshow(rgbImage);
-    %title("Origin image");
+    figure;
+    subplot(1, 2, 1);
+    title("Origin image");
     
     % visualise the origin feature space
-    %figure;
-    %subplot(1, 2, 1);
-    % scatter3(red_channel, green_channel, blue_channel); 
-    %title("Origin feature space");
+    figure;
+    subplot(1, 2, 1);
+    scatter3(I(:, 1), I(:, 2), I(:, 3), 12, I(:, 1 : 3)); 
+    title("Origin feature space");
   
-    % Define window size, which will determine the neighbors within the window / kernel
-    window_size = 0.2; % Need to be reconsidered 
+    % Pre-define varaibles
     
-    % threshhold for convegence
+    % Window size, which will determine the neighbors within the window / kernel, it need to be adjusted accordingly
+    window_size = 0.2; 
+    
+    % Sampling window number 
+    sample_size = 100;
+    
+    % Threshhold for convegence
     threshhold = 0.05;
+      
+      
+    % based on the visualization of detected groups in feature space, either we manually assign local sample data points to save the cost of the operation or randonly assign the data point value
     
-    % variables to check convegence
-    % old_centroid = zeros(1, 3); 
-    % new_centroid = zeros(1, 3); 
-        
+%    centroid_list = [0.2 0.2 0.2; 0.4 0.4 0.4; 0.6 0.6 0.6; 0.8 0.8 0.8;  ]; % manually assign
     
-    
+    for i = 1:20 % randonly assign
         
-        % Initialize windows at individual feature points
-        randon_fp = rand(1,3);
-        
-        % determine what are the neighbours within a certain distance
-        
-        
-        
-    
-    center_list = zeros(20, 3);
-    
-    for i = 1:20
         max = size(data_points,1);
         r = randi([1,max],1);
-        center_list(i,1) = data_points(i,1);
-        center_list(i,2) = data_points(i,2);
-        center_list(i,3) = data_points(i,3);
+        center_list(i,1) = data_points(r,1);
+        center_list(i,2) = data_points(r,2);
+        center_list(i,3) = data_points(r,3);
         
     end
     
@@ -127,27 +110,9 @@ function [image] = mean_shift(I)
     image = data_points;
     
     % visualise the feature space after mean shift 
-    subplot(1, 2, 2);
-%    scatter3(data_points(:, 1), data_points(:, 2), data_points(:, 3)); 
-    % scatter3(red_channel, green_channel, blue_channel); 
+    subplot(1, 2, 2); 
     title("feature space after mean shift");
         
-        
-   
-
-
- 
-
-  
-  %Function to calculate distance 
-  
-  % Function to determine the neighbors
-  % calculate the distance inbetween two points and look if it is within the windows size
-  % the window size used as max distance to dermine the neighbors
-  % Output will be an array of neighbors
-  
-  % Make all datapoints centroids
- 
   
 end % end function
 
